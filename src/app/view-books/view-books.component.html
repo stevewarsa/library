@@ -1,0 +1,38 @@
+<div class="container">
+  There are {{books.length}} books  <button type="button" class="btn btn-default" (click)="refresh()">Refresh</button>
+  <p-dataTable [value]="books" [rows]="5" [paginator]="true" [paginatorPosition]="'both'">
+    <p-column field="title" header="Title" [style]="{'width':'35%'}" [filter]="true" filterMatchMode="contains" filterPlaceholder="Search">
+      <ng-template let-book="rowData" pTemplate="body">
+        <button type="button" pButton (click)="selectBook($event, book, op)" icon="fa fa-search"></button> {{book.title}}
+      </ng-template>
+    </p-column>
+  </p-dataTable>
+  <p-dialog header="Details" [(visible)]="display">
+    <div class="ui-g ui-fluid">
+      <div class="ui-g-12 ui-md-9">
+        <div class="ui-g">
+          <div class="ui-g-2 ui-sm-6"><strong>Title:</strong> </div>
+          <div class="ui-g-10 ui-sm-6">{{selectedBook?.title}}</div>
+
+          <div class="ui-g-2 ui-sm-6"><strong>Sub:</strong> </div>
+          <div class="ui-g-10 ui-sm-6">{{selectedBook?.subtitle}}</div>
+
+          <div class="ui-g-2 ui-sm-6"><strong>Type:</strong> </div>
+          <div class="ui-g-10 ui-sm-6">{{selectedBook?.author}}</div>
+
+          <div class="ui-g-2 ui-sm-6"><strong>Type:</strong> </div>
+          <div class="ui-g-10 ui-sm-6">{{selectedBook?.type_of_book}}</div>
+
+          <div class="ui-g-2 ui-sm-6"><strong>Shelf:</strong> </div>
+          <div class="ui-g-10 ui-sm-6">{{selectedBook?.bookLocation}}</div>
+
+          <div class="ui-g-2 ui-sm-6"><strong>Row:</strong> </div>
+          <div class="ui-g-10 ui-sm-6">{{selectedBook?.shelf}}</div>
+
+          <div class="ui-g-2 ui-sm-6"><strong>Position:</strong> </div>
+          <div class="ui-g-10 ui-sm-6">{{selectedBook?.positionInRow}}</div>
+        </div>
+      </div>
+    </div>
+  </p-dialog>
+</div>

@@ -1,0 +1,40 @@
+<div class="container">
+  <h1>Add Book to Library</h1>
+  <form id="book-add" (ngSubmit)="addBook(f.value, f)" #f="ngForm">
+    <div class="form-group">
+      <label for="book-title">Book Title:</label>
+      <input type="text" class="form-control" ngModel name="title" id="book-title">
+    </div>
+    <div class="form-group">
+      <label for="book-sub-title">Sub Title:</label>
+      <input type="text" class="form-control" ngModel name="subtitle" id="book-sub-title">
+    </div>
+    <div class="form-group">
+      <label for="book-location">Shelf:</label>
+      <p-dropdown [options]="bookLocations" [(ngModel)]="selectedShelf" id="bookLocation" name="bookLocation"></p-dropdown> 
+    </div>
+    <div class="form-group">
+      <label for="location-in-book-shelf">Row In Shelf:</label>
+      <p-dropdown [options]="shelfs" [(ngModel)]="rowInBookShelf" id="shelf" name="shelf"></p-dropdown> 
+    </div>
+    <div class="form-group">
+      <label for="position-in-row">Position in Row:</label>
+      <p-dropdown [options]="positions" [(ngModel)]="positionInRow" id="positionInRow" name="positionInRow"></p-dropdown> 
+    </div>
+    <div class="form-group">
+      <label for="type_of_book">Type of Book:</label>
+      <p-dropdown [options]="bookTypes" [(ngModel)]="selectedBookType" id="type_of_book" name="type_of_book"></p-dropdown> 
+    </div>
+    <div class="form-group">
+      <label for="author">Author:</label>
+      <input type="text" class="form-control" #authorInput (keyup)="keyTyped(authorInput.value)" ngModel name="author" id="author">
+      <div *ngIf="matchingAuthors.length > 0">
+        <ul>
+          <li *ngFor="let matchingAuthor of matchingAuthors"><a class="link-class" (click)="updateAuthorFormValue(matchingAuthor, f, authorInput)">{{matchingAuthor}}</a></li>
+        </ul>
+      </div>
+    </div>
+    <button type="submit" class="btn btn-default">Add Book</button>
+  </form>
+  <div class="alert alert-warning alert-dismissible" role="alert" *ngIf="validationMessage && validationMessage != null && validationMessage.length > 0">{{validationMessage}}</div>
+</div>

@@ -1,0 +1,41 @@
+<div class="ui-g ui-fluid" *ngIf="searchMode && !editMode">
+  <div class="ui-g-12 ui-md-9">
+    <textarea pInputTextarea [(ngModel)]="title" [rows]="5" [cols]="30"></textarea>
+  </div>
+  <div class="ui-g-12 ui-md-9">
+    <button pButton type="button" (click)="getByTitle()" label="Get"></button>
+  </div>
+</div>
+<div class="ui-g ui-fluid" *ngIf="!searchMode && !editMode">
+  <div class="ui-g-12 ui-md-9" *ngIf="books && books.length > 0">
+    <ul>
+      <li *ngFor="let book of books"><a (click)="editBook(book)">{{book?.title}} {{book?.subtitle}} ({{book.type_of_book}})</a></li>
+    </ul>
+    <button type="button" class="btn btn-default" (click)="backToSearch()">Back to Search</button>
+  </div>
+  <div class="ui-g-12 ui-md-9" *ngIf="!books || books.length === 0">
+      No books with title {{title}} <button type="button" class="btn btn-default" (click)="backToSearch()">Back to Search</button>
+  </div>
+</div>
+<div class="container" *ngIf="editMode">
+  <h3>Editing {{editingBook?.title}} {{editingBook?.subtitle}}</h3>
+  <form id="book-edit">
+    <div class="form-group">
+      <label for="book-location">Shelf:</label>
+      <p-dropdown [options]="bookLocations" [(ngModel)]="selectedShelf" id="book-location" name="book-location"></p-dropdown>
+    </div>
+    <div class="form-group">
+      <label for="location-in-book-shelf">Row In Shelf:</label>
+      <p-dropdown [options]="shelfs" [(ngModel)]="rowInBookShelf" id="row-in-book-shelf" name="row-in-book-shelf"></p-dropdown>
+    </div>
+    <div class="form-group">
+      <label for="position-in-row">Position in Row:</label>
+      <p-dropdown [options]="positions" [(ngModel)]="positionInRow" id="position-in-row" name="position-in-row"></p-dropdown>
+    </div>
+    <button type="button" class="btn btn-default" (click)="submitChanges()">Submit</button>
+  </form>
+</div>
+<div class="container" *ngIf="errorMessage && editMode">
+  {{errorMessage}}
+  <button type="button" class="btn btn-default" (click)="tryAgain()">Try Again</button>
+</div>    
