@@ -2,6 +2,8 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
 import { HttpClientModule } from '@angular/common/http';
+import {ConfirmDialogModule} from 'primeng/confirmdialog';
+import {ConfirmationService} from 'primeng/api';
 
 import { AppComponent } from './app.component';
 import { AddBookComponent } from './add-book/add-book.component';
@@ -33,9 +35,10 @@ import { RandomBookComponent } from './random-book/random-book.component';
     OverlayPanelModule,
     ButtonModule,
     DataListModule,
-    InputTextareaModule
+    InputTextareaModule,
+    ConfirmDialogModule
   ],
-  providers: [BookService],
+  providers: [BookService, ConfirmationService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

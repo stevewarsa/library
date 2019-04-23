@@ -3,7 +3,8 @@
   <p-dataTable [value]="books" [rows]="10" [paginator]="true" [paginatorPosition]="'both'">
     <p-column field="title" header="Title" [style]="{'width':'35%'}" [filter]="true" filterMatchMode="contains" filterPlaceholder="Search">
       <ng-template let-book="rowData" pTemplate="body">
-        <button type="button" pButton (click)="selectBook($event, book, op)" icon="fa fa-search"></button> {{book.title}}
+        <button style="margin-right: 5px;" type="button" pButton (click)="selectBook(book)" icon="fa fa-search"></button> 
+        <button type="button" pButton (click)="deleteBook(book)" icon="fa fa-remove"></button> {{book.title}}
       </ng-template>
     </p-column>
   </p-dataTable>
@@ -17,7 +18,7 @@
           <div class="ui-g-2 ui-sm-6"><strong>Sub:</strong> </div>
           <div class="ui-g-10 ui-sm-6">{{selectedBook?.subtitle}}</div>
 
-          <div class="ui-g-2 ui-sm-6"><strong>Type:</strong> </div>
+          <div class="ui-g-2 ui-sm-6"><strong>Author:</strong> </div>
           <div class="ui-g-10 ui-sm-6">{{selectedBook?.author}}</div>
 
           <div class="ui-g-2 ui-sm-6"><strong>Type:</strong> </div>
@@ -35,4 +36,5 @@
       </div>
     </div>
   </p-dialog>
+  <p-confirmDialog header="Delete Book?" icon="pi pi-exclamation-triangle"></p-confirmDialog>
 </div>

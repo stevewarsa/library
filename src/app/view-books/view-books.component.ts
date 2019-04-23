@@ -1,5 +1,5 @@
 import { Component, OnDestroy, ViewEncapsulation } from '@angular/core';
-import { OverlayPanel } from 'primeng/primeng';
+import { OverlayPanel, ConfirmationService } from 'primeng/primeng';
 import { Book } from '../book';
 import { BookService } from '../book.service';
 import { Subscription } from 'rxjs';
@@ -17,7 +17,7 @@ export class ViewBooksComponent implements OnDestroy {
   display:boolean = false;
   selectedBook: Book;
 
-  constructor(private bookService:BookService) {
+  constructor(private bookService:BookService, private confirmationService: ConfirmationService) {
     console.log('ViewBooksComponent.constructor - calling bookService.getBooks()...');
     this.loadBooks();
     this.subscription = this.bookService.bookAnnounced$.subscribe(
@@ -42,11 +42,24 @@ export class ViewBooksComponent implements OnDestroy {
     this.subscription.unsubscribe();
   }
 
-  selectBook(event,book: Book, overlaypanel: OverlayPanel) {
-        this.selectedBook = book;
-        this.display = true;
+  selectBook(book: Book) {
+    this.selectedBook = book;
+    this.display = true;
   }
 
+  deleteBook(book: Book) {
+    this.confirmationService.confirm({
+      message: 'Are you sure that you want to delete this book?',
+      accept: () => {
+        this.bookService.deleteBook(book.id).subscribe((response: string) => {
+          console.log("Here is the response for delete book: " + response);
+          console.log("Reloading books now... ");
+          this.loadBooks();
+        });
+      }
+    });
+  }
+  
   refresh() {
     this.loadBooks();
   }

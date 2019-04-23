@@ -19,8 +19,13 @@ export class BookService {
   }
   
   updateBook(book:Book):Observable<any> {
-    console.log('BookService.addBook - calling server to update book...');
+    console.log('BookService.updateBook - calling server to update book...');
     return this.httpService.post(this._url + 'update_book.php', book);
+  }
+  
+  deleteBook(bookId:number):Observable<any> {
+    console.log('BookService.deleteBook - calling server to delete book...');
+    return this.httpService.post(this._url + 'delete_book.php', {bookId: bookId});
   }
 
   announceNewBook(book:Book) {
