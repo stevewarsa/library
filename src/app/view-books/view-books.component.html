@@ -1,6 +1,6 @@
 <div class="container">
   There are {{books.length}} books  <button type="button" class="btn btn-default" (click)="refresh()">Refresh</button>
-  <p-dataTable [value]="books" [rows]="5" [paginator]="true" [paginatorPosition]="'both'">
+  <p-dataTable [value]="books" [rows]="10" [paginator]="true" [paginatorPosition]="'both'">
     <p-column field="title" header="Title" [style]="{'width':'35%'}" [filter]="true" filterMatchMode="contains" filterPlaceholder="Search">
       <ng-template let-book="rowData" pTemplate="body">
         <button type="button" pButton (click)="selectBook($event, book, op)" icon="fa fa-search"></button> {{book.title}}

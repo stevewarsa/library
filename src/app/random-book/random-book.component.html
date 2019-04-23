@@ -1,0 +1,37 @@
+<div class="container">
+  <form class="form-inline">
+      <div class="form-group">
+        <label for="type_of_book">Book Type:</label>
+        <p-dropdown [options]="bookTypes" [(ngModel)]="selectedBookType" id="type_of_book" name="type_of_book"></p-dropdown> 
+      </div>
+      <button [disabled]="!selectedBookType" type="button" (click)="getRandomBook()" class="btn btn-primary">Random</button>
+  </form>
+  <div [hidden]="!randomBook" class="jumbotron">
+    <form id="book-display">
+      <div class="form-group">
+        <label for="book-title">Book Title:</label>
+        <span class="form-control" id="book-title">(book ID: {{randomBook?.id}}) {{randomBook?.title}}</span>
+      </div>
+      <div class="form-group">
+        <label for="book-sub-title">Sub Title:</label>
+        <span class="form-control" id="book-sub-title">{{randomBook?.subtitle}}</span>
+      </div>
+      <div class="form-group">
+        <label for="author">Author:</label>
+        <span class="form-control" id="author">{{randomBook?.author}}</span>
+      </div>
+      <div class="form-group">
+        <label for="bookLocation">Book Location:</label>
+        <span class="form-control" id="bookLocation">{{randomBook?.bookLocation}}</span>
+      </div>
+      <div [hidden]="!randomBook || (!randomBook.shelf && !randomBook.positionInRow)" class="form-group">
+        <label for="shelfPosition">Shelf, Position in Row:</label>
+        <span class="form-control" id="shelfPosition">{{randomBook?.shelf}}, {{randomBook?.positionInRow}}</span>
+      </div>
+      <div class="form-group">
+        <label for="type_of_book">Type of Book:</label>
+        <span class="form-control" id="type_of_book">{{randomBook?.type_of_book}}</span>
+      </div>
+    </form>
+  </div>
+</div>

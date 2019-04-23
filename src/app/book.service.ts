@@ -14,32 +14,37 @@ export class BookService {
   }
   
   addBook(book:Book):Observable<any> {
-    console.log('BookService.addBook - calling server to add new book...')
+    console.log('BookService.addBook - calling server to add new book...');
     return this.httpService.post(this._url + 'add_book.php', book);
   }
   
   updateBook(book:Book):Observable<any> {
-    console.log('BookService.addBook - calling server to update book...')
+    console.log('BookService.addBook - calling server to update book...');
     return this.httpService.post(this._url + 'update_book.php', book);
   }
 
   announceNewBook(book:Book) {
-    console.log('BookService.announceNewBook - announcing new book...')
+    console.log('BookService.announceNewBook - announcing new book...');
     this.bookAnnouncedSource.next(book);
   }
 
   getBooks():Observable<any> {
-    console.log('BookService.getBooks - calling ' + this._url + 'get_books.php...')
+    console.log('BookService.getBooks - calling ' + this._url + 'get_books.php...');
     return this.httpService.get(this._url + 'get_books.php');
   }
 
+  getRandomBook(bookType: string):Observable<Book> {
+    console.log('BookService.getRandomBook - calling ' + this._url + 'get_random_book.php...');
+    return this.httpService.post<Book>(this._url + 'get_random_book.php', bookType);
+  }
+
   searchBooks(searchText:string):Observable<any> {
-    console.log('BookService.getBooks - calling ' + this._url + 'get_books.php...')
+    console.log('BookService.getBooks - calling ' + this._url + 'get_books.php...');
     return this.httpService.get(this._url + 'search_books.php?searchText=' + searchText);
   }
 
   getAuthors():Observable<any> {
-    console.log('BookService.getAuthors - calling ' + this._url + 'get_authors.php...')
+    console.log('BookService.getAuthors - calling ' + this._url + 'get_authors.php...');
     return this.httpService.get(this._url + 'get_authors.php');
   }
 }

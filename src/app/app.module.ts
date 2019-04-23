@@ -10,13 +10,15 @@ import { UpdateLocationsComponent } from './update-locations/update-locations.co
 import { FormsModule } from '@angular/forms';
 import { DataTableModule, DialogModule, InputTextModule, DropdownModule, TabViewModule, OverlayPanelModule, ButtonModule, DataListModule, InputTextareaModule } from 'primeng/primeng';
 import { BookService } from './book.service';
+import { RandomBookComponent } from './random-book/random-book.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     AddBookComponent,
     ViewBooksComponent,
-    UpdateLocationsComponent
+    UpdateLocationsComponent,
+    RandomBookComponent
   ],
   imports: [
     BrowserModule,
